@@ -201,6 +201,89 @@ $photo     = $profile['photo'] ?? 'default-avatar.jpg';
         .stats-spacing { margin-top: 4.5rem; }
         .footer .social-links { justify-content: center; }
 
+        /* ===== Contact: mobile responsive ===== */
+        .contact-grid > * { min-width: 0; }
+        .contact-info-card,
+        .contact-form { width: 100%; }
+        .contact-info-item > div:last-child { min-width: 0; }
+        .contact-info-item p {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        /* 16px inputs stop iOS Safari from zooming on focus */
+        .contact-form .form-group input,
+        .contact-form .form-group textarea {
+            font-size: 1rem;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .contact-form .btn-block { min-height: 54px; }
+        .contact-social { flex-wrap: wrap; }
+
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            /* form first on tablets / phones, contact details after */
+            .contact-form { order: -1; }
+            /* side-slide animations cause sideways scroll on small screens, use fade-up instead */
+            .contact-grid [data-aos]:not(.aos-animate) {
+                transform: translateY(40px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            #contact.section { padding: 64px 0; }
+            .contact-info-card,
+            .contact-form {
+                padding: 1.6rem;
+                border-radius: 18px;
+            }
+            .contact-form .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .contact-info-item {
+                gap: 0.9rem;
+                margin-bottom: 1.3rem;
+            }
+            .contact-icon {
+                width: 46px;
+                height: 46px;
+                border-radius: 13px;
+                font-size: 1.05rem;
+            }
+            .contact-social {
+                margin-top: 1.5rem;
+                padding-top: 1.3rem;
+                justify-content: center;
+            }
+            .back-to-top {
+                right: 16px;
+                bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #contact .section-container { padding: 0 1.1rem; }
+            #contact .section-title { letter-spacing: -1px; }
+            #contact .section-subtitle { font-size: 1rem; }
+            .contact-info-card,
+            .contact-form { padding: 1.25rem; }
+            .contact-info-item h4 { font-size: 0.8rem; }
+            .contact-info-item p { font-size: 0.95rem; }
+            .contact-form .form-group { margin-bottom: 1.1rem; }
+            .contact-form .form-group input,
+            .contact-form .form-group textarea { padding: 13px 15px; }
+            .contact-social a {
+                width: 44px;
+                height: 44px;
+            }
+        }
+
         /* Back to top */
         .back-to-top {
             position: fixed;
@@ -612,16 +695,16 @@ $photo     = $profile['photo'] ?? 'default-avatar.jpg';
                         </div>
                         <div class="form-group">
                             <label for="cf-email">Your Email</label>
-                            <input type="email" id="cf-email" name="email" required placeholder="john@example.com" autocomplete="email">
+                            <input type="email" id="cf-email" name="email" required placeholder="john@example.com" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="cf-subject">Subject</label>
-                        <input type="text" id="cf-subject" name="subject" placeholder="Project Inquiry">
+                        <input type="text" id="cf-subject" name="subject" placeholder="Project Inquiry" enterkeyhint="next">
                     </div>
                     <div class="form-group">
                         <label for="cf-message">Message</label>
-                        <textarea id="cf-message" name="message" required placeholder="Tell me about your project..."></textarea>
+                        <textarea id="cf-message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">
                         <i class="fas fa-paper-plane"></i> Send Message
